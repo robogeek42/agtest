@@ -8,10 +8,11 @@ $(DIRS): $(BINARIES)
 set_agondev:
 	cd app1 ; rm makefile ; ln -s agondev_makefile makefile
 	cd app2 ; rm makefile ; ln -s agondev_makefile makefile
-	ln -t app1/src -sr src/util.c
-	ln -t app1/src -sr include/util.h
-	ln -t app2/src -sr src/util.c
-	ln -t app2/src -sr include/util.h
+	ln -f -t app1/src -sr src/util.c
+	ln -f -t app1/src -sr include/util.h
+	ln -f -t app2/src -sr src/util.c
+	ln -f -t app2/src -sr include/util.h
+	ln -f -t app2/src -sr include/keydefines.h
 
 set_agdev:
 	cd app1 ; rm makefile ; ln -s agdev_makefile makefile
@@ -20,6 +21,7 @@ set_agdev:
 	rm -f app1/src/util.h
 	rm -f app2/src/util.c
 	rm -f app2/src/util.h
+	rm -f app2/src/keydefines.h
 
 $(APPS):
 	@echo ---------------------------

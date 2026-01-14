@@ -13,6 +13,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "keydefines.h"
 #include "util.h"
 
 int main(/*int argc, char *argv[]*/)
@@ -45,8 +47,8 @@ int main(/*int argc, char *argv[]*/)
     draw_filled_box(100,275,50,50,2,3);
 
     clear_keys();
-    printf("\nPress any key\n");
-    wait_for_any_key();
+    printf("\nPress q to quit!\n");
+    wait_for_key(KEY_q);
 
 #ifdef AGONDEV
 	kbuf_deinit();
