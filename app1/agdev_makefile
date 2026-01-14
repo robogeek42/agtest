@@ -7,8 +7,8 @@ DESCRIPTION = "Test 1"
 COMPRESSED = NO
 LDHAS_ARG_PROCESSING = 1
 
-CFLAGS = -Wall -Wextra -Oz
-CXXFLAGS = -Wall -Wextra -Oz
+CFLAGS = -Wall -Wextra -Oz -I../include
+EXTRA_C_SOURCES = ../src/util.c
 
 FAE_HOME = ~/agon/fab/
 
@@ -17,7 +17,7 @@ include $(shell cedev-config --makefile)
 
 install: bin/$(NAME).bin
 	cp bin/$(NAME).bin ../$(NAME).bin
-	cp bin/$(NAME).bin $(FAE_HOME)/sdcard/$(NAME).bin
+	#cp bin/$(NAME).bin $(FAE_HOME)/sdcard/$(NAME).bin
 	
 
 .PHONY: clean

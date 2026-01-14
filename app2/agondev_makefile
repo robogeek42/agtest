@@ -12,4 +12,4 @@ include $(shell agondev-config --makefile)
 
 install: bin/$(NAME).bin
 	cp bin/$(NAME).bin ../$(NAME).bin
-	cp bin/$(NAME).bin $(FAE_HOME)/sdcard/$(NAME).bin
+	#cp bin/$(NAME).bin $(FAE_HOME)/sdcard/$(NAME).bin
