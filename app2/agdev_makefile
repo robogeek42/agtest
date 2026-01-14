@@ -1,0 +1,23 @@
+# ----------------------------
+# CEDev/AgDev Makefile
+# ----------------------------
+
+NAME = app2
+DESCRIPTION = "Test 2"
+COMPRESSED = NO
+LDHAS_ARG_PROCESSING = 1
+
+CFLAGS = -Wall -Wextra -Oz
+CXXFLAGS = -Wall -Wextra -Oz
+
+FAE_HOME = ~/agon/fab/
+
+# ----------------------------
+include $(shell cedev-config --makefile)
+
+install: bin/$(NAME).bin
+	cp bin/$(NAME).bin ../$(NAME).bin
+	cp bin/$(NAME).bin $(FAE_HOME)/sdcard/$(NAME).bin
+	
+
+.PHONY: clean
