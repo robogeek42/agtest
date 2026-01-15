@@ -1,5 +1,6 @@
 APPS = app1 app2
 BINARIES = $(patsubst %,%.bin,$(APPS))
+MYLIBS = util
 FAE_HOME = ~/agon/fab
 
 all: $(APPS)
@@ -8,22 +9,35 @@ $(DIRS): $(BINARIES)
 set_agondev:
 	cd app1 ; rm makefile ; ln -s agondev_makefile makefile
 	cd app2 ; rm makefile ; ln -s agondev_makefile makefile
-	ln -f -t app1/src -sr src/util.c
-	ln -f -t app1/src -sr include/util.h
-	ln -f -t app2/src -sr src/util.c
-	ln -f -t app2/src -sr include/util.h
-	ln -f -t app2/src -sr include/keydefines.h
+	echo "agondev" > compiler
+	mkdir -p app1/include
+	cp -f include/* app1/include/
+	mkdir -p app2/include
+	cp -f include/* app2/include/
 
 set_agdev:
 	cd app1 ; rm makefile ; ln -s agdev_makefile makefile
 	cd app2 ; rm makefile ; ln -s agdev_makefile makefile
-	rm -f app1/src/util.c
-	rm -f app1/src/util.h
-	rm -f app2/src/util.c
-	rm -f app2/src/util.h
-	rm -f app2/src/keydefines.h
+	echo "agdev" > compiler
 
-$(APPS):
+COMPILER = $(shell cat compiler)
+
+ifeq ($(COMPILER),agondev)
+$(MYLIBS): 
+	@echo ---------------------------
+	@echo "Make Library $@"
+	cd $@ ; make lib
+	
+	@echo "Copy library $@ to app1"
+	mkdir -p app1/lib
+	cp $@/bin/lib$@.a app1/lib
+	
+	@echo "Copy library $@ to app2"
+	mkdir -p app2/lib
+	cp $@/bin/lib$@.a app2/lib
+endif
+
+$(APPS): $(MYLIBS)
 	@echo ---------------------------
 	@echo Compile : $@
 	$(MAKE) -C $@ install
@@ -40,5 +54,5 @@ clean:
 	cd app1; make clean
 	cd app2; make clean
 
-.PHONY: all clean $(APPS)
+.PHONY: all clean $(MYLIBS) $(APPS)
 

@@ -8,7 +8,7 @@ COMPRESSED = NO
 LDHAS_ARG_PROCESSING = 1
 
 CFLAGS = -Wall -Wextra -Oz -I../include
-EXTRA_C_SOURCES = ../src/util.c
+EXTRA_C_SOURCES = ../util/src/util.c
 
 FAE_HOME = ~/agon/fab/
 

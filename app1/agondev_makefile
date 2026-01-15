@@ -4,6 +4,7 @@
 
 NAME = app1
 DESCRIPTION = "Test 1"
+LIBS = "-lutil"
 
 FAE_HOME = ~/agon/fab/
 
